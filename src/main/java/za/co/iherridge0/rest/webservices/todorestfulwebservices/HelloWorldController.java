@@ -16,6 +16,7 @@ public class HelloWorldController {
 
 	@GetMapping("/hello-world-bean")
 	public HelloWorldBean helloWorldBean() {
+		//throw new RuntimeException("Testing some error message being passed back");
 		return new HelloWorldBean("Hello World");
 	}
 
