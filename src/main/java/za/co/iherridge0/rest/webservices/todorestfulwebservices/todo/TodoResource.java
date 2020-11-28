@@ -24,7 +24,8 @@ public class TodoResource {
 	private ToDoRepository todoService;
 
 	/**
-	 * Retrieve all Todos for a User GET /users/{user_name}/todos
+	 * Retrieve all Todos for a User 
+	 * GET /users/{user_name}/todos
 	 * 
 	 * @param username
 	 * @return List of Todos
@@ -35,12 +36,20 @@ public class TodoResource {
 		return todoService.findAll();
 	}
 
-	// Delete a Todo of a User
-	// DELETE /users/{username}/todo/{todoid}
+	// 
+	// 
+	/**
+	 * Delete a Todo of a User
+	 * 
+	 * DELETE /users/{username}/todo/{todoid}
+	 * @param username
+	 * @param id
+	 * @return Not Found
+	 */
 	@DeleteMapping("/users/{username}/todos/{id}")
 	public ResponseEntity<Void> deleteTodo(@PathVariable String username, @PathVariable long id) {
 		todoService.deleteById(id);		
-		return ResponseEntity.notFound().build();
+		return ResponseEntity.noContent().build();
 	}
 
 	// Edit/Update a Todo
