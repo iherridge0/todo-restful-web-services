@@ -2,14 +2,17 @@ package za.co.iherridge0.rest.webservices.todorestfulwebservices.todo;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -32,8 +35,20 @@ public class TodoResource {
 	 */
 	//
 	@GetMapping(path = "/users/{username}/todos")
-	public List<Todo> retrieveAllTodos(@PathVariable String username) {
+	public List<Todo> getAllTodos(@PathVariable String username) {
 		return todoService.findAll();
+	}
+	
+	/**
+	 * Retrieve a todo for a user
+	 * @param username
+	 * @param id
+	 * @return  {@code Todo} If found
+	 * 			{@code null} if not found
+	 */
+	@GetMapping(path = "/users/{username}/todos/{id}")
+	public Optional<Todo> getTodo(@PathVariable String username, @PathVariable long id) {
+		return todoService.findById(id);
 	}
 
 	// 
@@ -54,6 +69,13 @@ public class TodoResource {
 
 	// Edit/Update a Todo
 	// PUT /users/{username}/todos/{todoid}
+	@PutMapping("users/{username}/todos/{id}")
+	public ResponseEntity<Todo> updateTodo(@PathVariable String username, @PathVariable long id, @RequestBody Todo todo){
+		
+		Todo todoUpdated = todoService.save(todo);
+				
+		return new ResponseEntity<Todo>(todoUpdated, HttpStatus.OK);
+	}
 
 	// Create a new Todo
 	// POST /users/{username}/todos/

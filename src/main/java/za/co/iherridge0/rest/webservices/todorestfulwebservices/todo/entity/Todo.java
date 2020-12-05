@@ -7,6 +7,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 @Entity
 @Table(name = "Todo")
 public class Todo {
@@ -16,10 +18,11 @@ public class Todo {
 	private long id;
 	private String username;
 	private String description;
+	//@JsonFormat(pattern="yyyy-MM-dd")
 	private Date targetDate;
 	private boolean isDone;
 	
-	public Todo() {
+	protected Todo() {
 		
 	}
 
