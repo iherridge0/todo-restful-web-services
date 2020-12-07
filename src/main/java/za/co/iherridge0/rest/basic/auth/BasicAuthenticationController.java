@@ -1,4 +1,4 @@
-package za.co.iherridge0.rest.webservices.todorestfulwebservices.basic.auth;
+package za.co.iherridge0.rest.basic.auth;
 
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;

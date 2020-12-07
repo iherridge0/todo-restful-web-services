@@ -1,4 +1,4 @@
-package za.co.iherridge0.rest.webservices.todorestfulwebservices.basic.auth;
+package za.co.iherridge0.rest.basic.auth;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
