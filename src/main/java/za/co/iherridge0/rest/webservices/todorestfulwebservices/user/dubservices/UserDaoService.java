@@ -1,10 +1,12 @@
-package za.co.iherridge0.rest.webservices.todorestfulwebservices.user;
+package za.co.iherridge0.rest.webservices.todorestfulwebservices.user.dubservices;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
 import org.springframework.stereotype.Component;
+
+import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities.User;
 
 @Component
 public class UserDaoService {

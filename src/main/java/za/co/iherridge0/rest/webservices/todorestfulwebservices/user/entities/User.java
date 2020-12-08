@@ -1,11 +1,9 @@
-package za.co.iherridge0.rest.webservices.todorestfulwebservices.user;
+package za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities;
 
 import java.util.Date;
 
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.Table;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
@@ -22,6 +20,8 @@ public class User {
 	@ApiModelProperty(notes = "The name should have atleast 2 characters.")
 	private String username;
 	
+	private String password;
+	
 	@Past
 	@ApiModelProperty(notes = "The birthDate must be in the past.")
 	private Date birthDate;
@@ -32,6 +32,12 @@ public class User {
 	
 	protected User() {
 		
+	}
+	
+	public User(String username, String password) {
+		super();
+		this.username = username;
+		this.password = password;
 	}
 
 	public User(String username, Date birthDate, String email) {
@@ -63,5 +69,13 @@ public class User {
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
 	}
 }
