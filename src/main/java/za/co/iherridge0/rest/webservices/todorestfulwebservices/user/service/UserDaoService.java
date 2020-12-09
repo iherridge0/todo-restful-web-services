@@ -1,4 +1,4 @@
-package za.co.iherridge0.rest.webservices.todorestfulwebservices.user.dubservices;
+package za.co.iherridge0.rest.webservices.todorestfulwebservices.user.service;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -12,8 +12,6 @@ import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities.Us
 public class UserDaoService {
 	
 	private static List<User> users = new ArrayList<User>();
-	
-	private static int usersCount = 3;
 	
 	static {
 		users.add(new User("in28minutes", new Date(), "in28minutes@gmail.com"));

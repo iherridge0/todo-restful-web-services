@@ -3,11 +3,15 @@ package za.co.iherridge0.rest.webservices.todorestfulwebservices.todo.entity;
 import java.util.Date;
 
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities.User;
 
 @Entity
 @Table(name = "Todo")
@@ -16,22 +20,27 @@ public class Todo {
 	@Id
 	@GeneratedValue
 	private long id;
-	private String username;
+	
 	private String description;
+	
 	//@JsonFormat(pattern="yyyy-MM-dd")
 	private Date targetDate;
+	
 	private boolean isDone;
+	
+	@ManyToOne(fetch=FetchType.LAZY)
+	@JsonIgnore
+	private User user;
 	
 	protected Todo() {
 		
 	}
 
-	public Todo(String username, String description, Date targetDate, boolean isDone) {
+	public Todo(String description, Date targetDate) {
 		super();
-		this.username = username;
 		this.description = description;
 		this.targetDate = targetDate;
-		this.isDone = isDone;
+		this.isDone = false;
 	}
 
 	public long getId() {
@@ -40,14 +49,6 @@ public class Todo {
 
 	public void setId(long id) {
 		this.id = id;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getDescription() {
@@ -74,28 +75,12 @@ public class Todo {
 		this.isDone = isDone;
 	}
 
-	@Override
-	public int hashCode() {
-		final int prime = 31;
-		int result = 1;
-		result = prime * result + (int) (id ^ (id >>> 32));
-		return result;
+	public User getUser() {
+		return user;
 	}
 
-	@Override
-	public boolean equals(Object obj) {
-		if (this == obj)
-			return true;
-		if (obj == null)
-			return false;
-		if (getClass() != obj.getClass())
-			return false;
-		Todo other = (Todo) obj;
-		if (id != other.id)
-			return false;
-		return true;
+	public void setUser(User user) {
+		this.user = user;
 	}
-
-	
 	
 }

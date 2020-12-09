@@ -70,8 +70,9 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers(HttpMethod.OPTIONS, "/**")
 				.and().ignoring()
 				.antMatchers(HttpMethod.GET, "/") // Other Stuff You want to Ignore
-				.antMatchers(HttpMethod.POST, "/jpa/**/**")
-				.antMatchers(HttpMethod.POST, "/jpa/users")
+				//.antMatchers(HttpMethod.POST, "/jpa/**/**")
+				//.antMatchers(HttpMethod.POST, "/jpa/users")
+				.antMatchers(HttpMethod.OPTIONS, "/jpa/**/**")
 				.antMatchers(HttpMethod.GET, "/refresh")
 				.and().ignoring()
 				.antMatchers("/h2-console/**/**")// Should not be done in Production!
