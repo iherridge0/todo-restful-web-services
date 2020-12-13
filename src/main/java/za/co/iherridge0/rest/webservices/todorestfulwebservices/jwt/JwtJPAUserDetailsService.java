@@ -17,15 +17,15 @@ public class JwtJPAUserDetailsService implements UserDetailsService {
 	@Autowired
 	UserRepository userRepository;
 
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		
+
 		Optional<User> findUser = userRepository.findById(username);
-		
-		if (!findUser.isPresent()) { throw new
-			 UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username)); }
-		
+
+		if (!findUser.isPresent()) {
+			throw new UsernameNotFoundException(String.format("USER_NOT_FOUND '%s'.", username));
+		}
+
 		return new JwtUserDetails(1L, username, findUser.get().getPassword(), "ROLE_USER_2");
 
 	}
