@@ -48,6 +48,8 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 			jwtToken = requestTokenHeader.substring(7);
 			try {
 				username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+				
+				
 			} catch (IllegalArgumentException e) {
 				logger.error("JWT_TOKEN_UNABLE_TO_GET_USERNAME", e);
 			} catch (ExpiredJwtException e) {
@@ -70,7 +72,7 @@ public class JwtTokenAuthorizationOncePerRequestFilter extends OncePerRequestFil
 				SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
 			}
 		}
-
+		
 		chain.doFilter(request, response);
 	}
 }

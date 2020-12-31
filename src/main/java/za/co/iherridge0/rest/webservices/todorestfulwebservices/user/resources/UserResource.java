@@ -23,12 +23,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
-import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.service.UserDaoService;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities.User;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.exceptions.UserNotFoundException;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.repositories.UserRepository;
+import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.service.UserDaoService;
 
-@CrossOrigin(origins = "http://localhost:4200")
+@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"})
 @RestController
 public class UserResource {
 
