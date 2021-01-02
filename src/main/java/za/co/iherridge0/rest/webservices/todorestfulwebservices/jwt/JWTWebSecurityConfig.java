@@ -66,10 +66,14 @@ public class JWTWebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	public void configure(WebSecurity webSecurity) throws Exception {
-		webSecurity.ignoring().antMatchers(HttpMethod.POST, authenticationPath).antMatchers(HttpMethod.OPTIONS, "/**")
+		webSecurity.ignoring()
+		.antMatchers(HttpMethod.POST, authenticationPath)
+		.antMatchers(HttpMethod.OPTIONS, "/**")
 		.and().ignoring()
 		.antMatchers(HttpMethod.GET, "/") // Other Stuff You want to Ignore
-		.antMatchers(HttpMethod.POST, "/jpa/users").and().ignoring()
+		.antMatchers(HttpMethod.POST, "/jpa/users")
+		.antMatchers(HttpMethod.POST, "/authenticate")
+		.and().ignoring()
 		.antMatchers("/h2-console/**/**");// Should not be done in Production!
 	}
 }

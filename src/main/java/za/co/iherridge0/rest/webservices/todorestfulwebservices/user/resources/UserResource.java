@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.entities.User;
+import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.exceptions.UserAlreadyExistException;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.exceptions.UserNotFoundException;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.repositories.UserRepository;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.service.UserDaoService;
@@ -112,6 +113,12 @@ public class UserResource {
 		String encodedString = encoder.encode(user.getPassword());
 			System.out.println(encodedString);
 			user.setPassword(encodedString);
+			
+		Optional<User> findById = userRepository.findById(user.getUsername());
+			
+		if(findById.isPresent())
+			throw new UserAlreadyExistException("Username (" + user.getUsername() + ") has already neem taken, please try again with a different username.");
+			
 		User savedUser = userRepository.save(user);
 
 		// Need to return a 201 CREATED status with URI location of new created resource
