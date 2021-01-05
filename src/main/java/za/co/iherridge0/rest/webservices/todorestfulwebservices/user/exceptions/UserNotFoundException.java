@@ -11,8 +11,8 @@ public class UserNotFoundException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 982357509535486169L;
 
-	public UserNotFoundException(String arg0) {
-		super(arg0);
+	public UserNotFoundException(String message) {
+		super(message);
 		// TODO Auto-generated constructor stub
 	}
 

@@ -29,7 +29,7 @@ import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.exceptions.
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.repositories.UserRepository;
 import za.co.iherridge0.rest.webservices.todorestfulwebservices.user.service.UserDaoService;
 
-@CrossOrigin(origins = {"http://localhost:4200", "http://localhost:3000"})
+@CrossOrigin(origins = { "http://localhost:4200", "http://localhost:3000" })
 @RestController
 public class UserResource {
 
@@ -103,22 +103,22 @@ public class UserResource {
 
 		return ResponseEntity.created(location).build();
 	}
-	
+
 	// input - details of user
 	// output - CREATED & Return the created URI
 	// POST /users
 	@PostMapping("/jpa/users")
-	public ResponseEntity<Object> createJPAUser(@Valid @RequestBody User user) {
+	public ResponseEntity<Void> createJPAUser(@Valid @RequestBody User user) {
 		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
 		String encodedString = encoder.encode(user.getPassword());
-			System.out.println(encodedString);
-			user.setPassword(encodedString);
-			
+		System.out.println(encodedString);
+		user.setPassword(encodedString);
+
 		Optional<User> findById = userRepository.findById(user.getUsername());
-			
-		if(findById.isPresent())
-			throw new UserAlreadyExistException("Username (" + user.getUsername() + ") has already neem taken, please try again with a different username.");
-			
+
+		if (findById.isPresent())
+			throw new UserAlreadyExistException("Username already exist");
+
 		User savedUser = userRepository.save(user);
 
 		// Need to return a 201 CREATED status with URI location of new created resource
@@ -127,6 +127,7 @@ public class UserResource {
 				.buildAndExpand(savedUser.getUsername()).toUri();
 
 		return ResponseEntity.created(location).build();
+		// return new ResponseEntity<>(HttpStatus.CREATED);
 	}
 
 	// DELETE /users/{id}
